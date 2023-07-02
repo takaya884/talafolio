@@ -1,5 +1,4 @@
 # localhost起動コマンド
-
 ``` bash
 # docker起動(バックグランド)
  ./vendor/bin/sail up -d
@@ -21,11 +20,31 @@ docker compose build --no-cache
 npm run dev
 ```
 
+
 # 開発環境構築メモ
 ``` bash
 # Laravelプロジェクトインストール
 curl -s "https://laravel.build/プロジェクト名" | bash
 
+# Githubにソース管理追加
+https://tech.amefure.com/web-github-laravel-push
+
+# Breezeをインストール
+./vendor/bin/sail composer require laravel/breeze
+
+# Breezeのインストールが完了したら、Breezeのインストールスクリプトを実行
+./vendor/bin/sail artisan breeze:install
+
+# データベースをマイグレーション
+./vendor/bin/sail artisan migrate
+
+# Userモデル作成
+./vendor/bin/sail artisan make:model Models\\User
+```
+
+
+# エラー対処
+``` bash
 # tailwindcssモジュールをインストール(PostCSSの設定が正しく読み込めていない場合)
 npm install tailwindcss
 
