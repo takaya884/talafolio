@@ -41,26 +41,6 @@ https://tech.amefure.com/web-github-laravel-push
 # Userモデル作成
 ./vendor/bin/sail artisan make:model Models\\User
 
-# Nuxt.jsのプロジェクトを作成
-npx create-nuxt-app nuxt
-
-# Nuxt.jsの質問
-? Project name: nuxt
-? Programming language: TypeScript
-? Package manager: Npm
-? UI framework: Bootstrap Vue
-? Template engine: HTML
-? Nuxt.js modules: (Press <space> to select, <a> to toggle all, <i> to invert selection)
-? Linting tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
-? Testing framework: None
-? Rendering mode: Universal (SSR / SSG)
-? Deployment target: Server (Node.js hosting)
-? Development tools: (Press <space> to select, <a> to toggle all, <i> to invert selection)
-? What is your GitHub username? nadeshiko582
-? Version control system: None
-
-```
-
 
 # エラー対処
 ``` bash
@@ -73,3 +53,7 @@ php artisan key:generate
 # SQLSTATE[HY000] [2002] Connection refused
 # ログイン時に、上記のエラーが発生。ターミナルからmysqlに接続できないからpasswordが間違ってる可能性がある。
 ```
+
+# ログインユーザー
+sutaron582@gmail.com
+password
