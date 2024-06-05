@@ -21,6 +21,6 @@
     "dependencies": {
         "pinia": "^2.1.4",
         "vue": "^3.2.36",
-        "vue-router": "^4.2.4"
+        "vue-router": "^4.3.2"
     }
 }
