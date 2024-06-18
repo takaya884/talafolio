@@ -54,3 +54,11 @@ php artisan key:generate
 # SQLSTATE[HY000] [2002] Connection refused
 # ログイン時に、上記のエラーが発生。ターミナルからmysqlに接続できないからpasswordが間違ってる可能性がある。
 ```
+
+# つまづいたポイント
+``` bash
+# bladeにtailwindcssを適用できなかった
+　　　　</head>の上に
+@vite(['resources/css/app.css', 'resources/js/app.js'])を追加する
+
+```
