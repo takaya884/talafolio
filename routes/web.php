@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::get('/dashboard', function () {
 Route::get('/memo',function(){
     return view('memo/index');
 })->middleware(['auth','verified'])->name('memo');
+
+Route::redirect('/','/memo');
+Route::resource('/memo',NoteController::class);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
