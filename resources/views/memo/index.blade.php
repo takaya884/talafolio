@@ -18,30 +18,17 @@
             @csrf
             <button class="block w-full bg-gray-500 text-white rounded font-bold text-xl mb-5" type="submit">+</button>
         </form>
-        {{-- ノートブック１ --}}
+        {{-- ノートブック --}}
+        @foreach ($notes as $note)
         <div class="ml-3 mb-2">
-            <h2 class="font-bold text-lg">Work</h2>
+            <h2 class="font-bold text-lg">{{ $note->note_title  }}</h2>
             <div class="flex flex-col ml-2">
-                <a class="truncate" href="/">Note1</a>
-                <a class="truncate" href="/">Note2</a>
+                @foreach ($note->pages as $page)
+                <a class="truncate" href="/">{{ $page->page_title }}</a>
+                @endforeach
             </div>
         </div>
-        {{-- ノートブック２ --}}
-        <div class="ml-3 mb-2">
-            <h2 class="font-bold text-lg">Private</h2>
-            <div class="flex flex-col ml-2">
-                <a class="truncate" href="/">Note1</a>
-                <a class="truncate" href="/">Note2</a>
-                <a class="truncate" href="/">Note3</a>
-            </div>
-        </div>
-        {{-- ノートブック３ --}}
-        <div class="ml-3 mb-2">
-            <h2 class="font-bold text-lg">Family</h2>
-            <div class="flex flex-col ml-2">
-                <a class="truncate" href="/">Note1</a>
-            </div>
-        </div>
+        @endforeach
     </div>
 
     {{-- テキストエリア --}}
