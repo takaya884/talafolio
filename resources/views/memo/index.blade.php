@@ -14,6 +14,9 @@
 <div class="flex h-screen">
     {{-- メニューエリア --}}
     <div class="bg-white rounded-lg w-80 m-5 p-3 shadow-lg">
+        <a href="/dashboard">
+            <button class="block w-full bg-gray-500 text-white rounded font-bold text-xl mb-5" type="submit">ダッシュボードへ</button>
+        </a>
         {{-- 新規作成ボタン --}}
         <form action="/" method="POST">
             @csrf
