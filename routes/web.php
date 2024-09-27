@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,8 @@ Route::get('/memo',function(){
 Route::redirect('/','/memo');
 Route::resource('/memo',NoteController::class);
 
+Route::get('/send-email', [EmailController::class, 'showForm'])->name('show.email.form');
+Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.email');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

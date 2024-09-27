@@ -11,7 +11,7 @@
                 @php
                 $menuItems = [
                     ['url' => '/memo', 'title' => 'メモ', 'description' => 'メモを作成・編集します', 'icon' => 'pencil'],
-                    ['url' => '/email', 'title' => 'メール送信', 'description' => 'メールを送信します（予定）', 'icon' => 'mail'],
+                    ['url' => '/send-email', 'title' => 'メール送信', 'description' => 'メールを送信します（予定）', 'icon' => 'mail'],
                     ['url' => '/chat', 'title' => 'チャット', 'description' => 'チャット機能を利用します（予定）', 'icon' => 'chat'],
                     ['url' => '/save', 'title' => '保存', 'description' => 'データを保存します', 'icon' => 'save'],
                     ['url' => '/video', 'title' => '動画再生', 'description' => '動画を再生します', 'icon' => 'play'],
