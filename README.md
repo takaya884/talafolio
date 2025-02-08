@@ -1,3 +1,8 @@
+# デプロイするブランチはmasterとする
+``` bash
+git branch master #ブランチ確認コマンド
+```
+
 # localhost起動コマンド
 ``` bash
 # docker起動(バックグランド)
