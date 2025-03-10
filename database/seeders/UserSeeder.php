@@ -9,9 +9,9 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            // その他のシーダー
-        ]);
+        // すでに存在するかを確認してから作成
+        if (!User::where('email', 'sutaron582@gmail.com')->exists()) {
+            User::factory()->create();
+        }
     }
 }
