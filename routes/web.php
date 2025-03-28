@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +32,13 @@ Route::get('/memo',function(){
 
 Route::redirect('/','/memo');
 Route::resource('/memo',NoteController::class);
+
+// ニュース関連のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+    Route::get('/news/category/{category}', [NewsController::class, 'category'])->name('news.category');
+    Route::get('/news/search', [NewsController::class, 'search'])->name('news.search');
+});
 
 Route::get('/send-email', [EmailController::class, 'showForm'])->name('show.email.form');
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.email');
