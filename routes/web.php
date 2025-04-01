@@ -25,13 +25,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// memo/index.blade.phpの表示のみ
-Route::get('/memo',function(){
-    return view('memo/index');
-})->middleware(['auth','verified'])->name('memo');
-
-Route::redirect('/','/memo');
-Route::resource('/memo',NoteController::class);
+// メモ機能のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('/memo', NoteController::class);
+    Route::post('/memo/{noteId}/add-page', [NoteController::class, 'addPage'])->name('memo.add-page');
+});
 
 // ニュース関連のルート
 Route::middleware(['auth', 'verified'])->group(function () {
