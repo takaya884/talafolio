@@ -35,8 +35,8 @@
                                 <p class="text-gray-500 dark:text-gray-400 text-center py-4">メモがありません</p>
                             @else
                                 @foreach($notes as $note)
-                                <div class="ml-3 mb-4 bg-gray-100 dark:bg-gray-600 p-3 rounded-lg">
-                                    <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200 mb-2">{{ $note->note_title }}</h2>
+                                <div class="ml-3 mb-4 bg-gray-100 dark:bg-gray-500 p-3 rounded-lg shadow-md">
+                                    <h2 class="font-bold text-lg text-gray-800 dark:text-white mb-2">{{ $note->note_title }}</h2>
                                     <div class="flex flex-col ml-2 space-y-1">
                                         @foreach($note->pages as $page)
                                         <a class="truncate text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition duration-300 ease-in-out" href="{{ route('memo.edit', $page->id) }}">
