@@ -16,6 +16,7 @@
                     ['url' => '/chat', 'title' => 'チャット', 'description' => 'チャット機能を利用します（予定）', 'icon' => 'chat'],
                     ['url' => '/save', 'title' => '保存', 'description' => 'データを保存します', 'icon' => 'save'],
                     ['url' => '/video', 'title' => '動画再生', 'description' => '動画を再生します', 'icon' => 'play'],
+                    ['url' => '/cron', 'title' => 'バッチ処理', 'description' => 'バッチ処理を実行します', 'icon' => 'play'],
                 ];
                 @endphp
 
