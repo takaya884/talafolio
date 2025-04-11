@@ -12,6 +12,7 @@
                 $menuItems = [
                     ['url' => '/memo', 'title' => 'メモ', 'description' => 'メモを作成・編集します', 'icon' => 'pencil'],
                     ['url' => '/news', 'title' => 'ニュース', 'description' => '最新のニュースを閲覧します', 'icon' => 'news'],
+                    ['url' => '/session', 'title' => 'セッション', 'description' => 'セッション管理と学習', 'icon' => 'key'],
                     ['url' => '/send-email', 'title' => 'メール送信', 'description' => 'メールを送信します（予定）', 'icon' => 'mail'],
                     ['url' => '/chat', 'title' => 'チャット', 'description' => 'チャット機能を利用します（予定）', 'icon' => 'chat'],
                     ['url' => '/save', 'title' => '保存', 'description' => 'データを保存します', 'icon' => 'save'],
@@ -49,6 +50,10 @@
                                     @elseif ($item['icon'] === 'news')
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                        </svg>
+                                    @elseif ($item['icon'] === 'key')
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
                                         </svg>
                                     @endif
                                 </span>
