@@ -4,6 +4,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,6 +37,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/news', [NewsController::class, 'index'])->name('news.index');
     Route::get('/news/category/{category}', [NewsController::class, 'category'])->name('news.category');
     Route::get('/news/search', [NewsController::class, 'search'])->name('news.search');
+});
+
+// セッション関連のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/session', [SessionController::class, 'index'])->name('session.index');
+    Route::post('/session/store', [SessionController::class, 'store'])->name('session.store');
+    Route::delete('/session/{key}', [SessionController::class, 'destroy'])->name('session.destroy');
+    Route::post('/session/clear', [SessionController::class, 'clear'])->name('session.clear');
+    Route::post('/session/regenerate', [SessionController::class, 'regenerate'])->name('session.regenerate');
 });
 
 Route::get('/send-email', [EmailController::class, 'showForm'])->name('show.email.form');
