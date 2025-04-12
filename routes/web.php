@@ -5,6 +5,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\CronController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,6 +51,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::get('/send-email', [EmailController::class, 'showForm'])->name('show.email.form');
 Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.email');
+
+// Cron関連のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/cron', [CronController::class, 'index'])->name('cron.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
