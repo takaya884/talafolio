@@ -6,6 +6,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CronController;
+use App\Http\Controllers\CookieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,13 @@ Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.em
 // Cron関連のルート
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cron', [CronController::class, 'index'])->name('cron.index');
+});
+
+// Cookie関連のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/cookie', [CookieController::class, 'index'])->name('cookie.index');
+    Route::post('/cookie/set', [CookieController::class, 'setCookie'])->name('cookie.set');
+    Route::post('/cookie/remove', [CookieController::class, 'removeCookie'])->name('cookie.remove');
 });
 
 Route::middleware('auth')->group(function () {
