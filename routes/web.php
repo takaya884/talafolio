@@ -6,6 +6,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CronController;
+use App\Http\Controllers\ModalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,12 @@ Route::post('/send-email', [EmailController::class, 'sendEmail'])->name('send.em
 // Cron関連のルート
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cron', [CronController::class, 'index'])->name('cron.index');
+});
+
+// モーダル関連のルート
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/modal', [ModalController::class, 'index'])->name('modal.index');
+    Route::post('/modal', [ModalController::class, 'store'])->name('modal.store');
 });
 
 Route::middleware('auth')->group(function () {
