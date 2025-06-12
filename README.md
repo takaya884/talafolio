@@ -101,3 +101,27 @@ php artisan key:generate
 
 ```
 
+## Vue.js（Composition API）によるSPA化対応（2024年6月対応）
+
+- **フロントエンドをVue3（Composition API）＋ViteでSPA化**
+  - `resources/js/app.ts` をエントリーポイントにSPA構成
+  - ルーティングは `vue-router` で管理
+  - 状態管理は `pinia` を導入
+  - 認証・API通信はLaravelバックエンドの既存コントローラーを活用
+- **主な画面・機能**
+  - ログイン画面（SPA化）
+  - ダッシュボード画面（青基調のデザインに刷新）
+  - メモ、ニュース、セッション、メール、Cron管理画面（SPAルーティング対応）
+- **デザイン**
+  - ヘッダー・ダッシュボードを青系グラデーションでモダンに
+  - Tailwind CSSでスタイリング
+- **起動方法**
+  1. 依存パッケージインストール  
+     `npm install --legacy-peer-deps`
+  2. Vite開発サーバー起動  
+     `npm run dev`
+  3. Docker（Laravelサーバー）は別途起動しておくこと
+  4. ブラウザで [http://localhost:5173](http://localhost:5173) にアクセス
+
+---
+
