@@ -44,6 +44,14 @@
                         <h3 class="text-xl font-semibold mb-2">Cron</h3>
                         <p class="text-blue-100">Cronジョブの管理ができます</p>
                     </router-link>
+                    <!-- 新規ユーザー作成 -->
+                    <router-link
+                        to="/register"
+                        class="block p-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-200 text-white"
+                    >
+                        <h3 class="text-xl font-semibold mb-2">新規ユーザー作成</h3>
+                        <p class="text-blue-100">新しいユーザーを登録できます</p>
+                    </router-link>
                 </div>
             </div>
         </div>

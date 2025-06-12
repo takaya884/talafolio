@@ -53,3 +53,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Cron関連のAPI
     Route::get('/cron', [CronController::class, 'index']);
 });
+
+// 新規ユーザー登録API
+Route::post('/register', [App\Http\Controllers\Auth\RegisteredUserController::class, 'apiRegister']);

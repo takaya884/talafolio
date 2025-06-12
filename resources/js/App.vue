@@ -32,6 +32,7 @@
                         >
                             ログアウト
                         </button>
+                        <span v-if="userName" class="ml-4 text-white font-bold text-lg drop-shadow">{{ userName }}</span>
                     </div>
                 </div>
             </div>
@@ -44,13 +45,31 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const userName = ref('');
 
 const isAuthenticated = computed(() => {
     return !!localStorage.getItem('token');
+});
+
+onMounted(async () => {
+    if (isAuthenticated.value) {
+        try {
+            const res = await fetch('/api/user', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Accept': 'application/json',
+                },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                userName.value = data.name;
+            }
+        } catch (e) {}
+    }
 });
 
 const navigationItems = [

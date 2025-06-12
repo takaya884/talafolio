@@ -48,4 +48,29 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+
+    /**
+     * API: 新規ユーザー登録
+     */
+    public function apiRegister(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        event(new Registered($user));
+
+        return response()->json([
+            'message' => 'ユーザー登録が完了しました',
+            'user' => $user
+        ], 201);
+    }
 }

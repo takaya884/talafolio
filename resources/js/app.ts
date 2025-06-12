@@ -49,6 +49,12 @@ const router = createRouter({
             name: 'cron',
             component: () => import('./views/cron/Index.vue'),
             meta: { requiresAuth: true }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: () => import('./views/auth/Register.vue'),
+            meta: { requiresAuth: false }
         }
     ]
 });

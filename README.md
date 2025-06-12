@@ -125,3 +125,38 @@ php artisan key:generate
 
 ---
 
+## 今回のSPA化対応で編集・追加した主なファイル一覧
+
+- `resources/js/app.ts`  
+  Vue3 SPAエントリーポイント。ルーティングやPinia導入、画面遷移の制御を実装。
+- `resources/js/App.vue`  
+  全体レイアウト・ナビゲーションバー（ヘッダー）・ユーザー名表示・ログアウト処理など。
+- `resources/js/views/Dashboard.vue`  
+  ダッシュボード画面。青基調のデザインに刷新し、各機能・新規ユーザー作成へのリンクカードを配置。
+- `resources/js/views/auth/Login.vue`  
+  ログイン画面。中央配置・大きめ・青基調でモダンなデザインに。
+- `resources/js/views/auth/Register.vue`  
+  新規ユーザー登録画面。バリデーション・エラー表示・登録API連携。
+- `resources/js/views/memo/Index.vue`  
+  メモ機能画面（SPAルーティング用のプレースホルダー）。
+- `resources/js/views/news/Index.vue`  
+  ニュース機能画面（SPAルーティング用のプレースホルダー）。
+- `resources/js/views/session/Index.vue`  
+  セッション管理画面（SPAルーティング用のプレースホルダー）。
+- `resources/js/views/email/Index.vue`  
+  メール送信画面（SPAルーティング用のプレースホルダー）。
+- `resources/js/views/cron/Index.vue`  
+  Cron管理画面（SPAルーティング用のプレースホルダー）。
+- `routes/api.php`  
+  認証・ユーザー登録・各種APIルートの追加。
+- `app/Http/Controllers/Auth/AuthenticatedSessionController.php`  
+  API用ログイン・ログアウトメソッド追加。
+- `app/Http/Controllers/Auth/RegisteredUserController.php`  
+  API用ユーザー登録メソッド追加。
+- `resources/views/layouts/app.blade.php`  
+  SPA用にViteエントリーポイントを修正。
+- `package.json` `tsconfig.json` `vite.config.js`  
+  Vue3, Vite, TypeScript, Pinia, vue-router などSPA用依存パッケージ導入・設定。
+
+---
+
