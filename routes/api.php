@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\CronController;
 use Illuminate\Http\Request;
@@ -52,6 +53,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Cron関連のAPI
     Route::get('/cron', [CronController::class, 'index']);
+
+    // プロフィール関連のAPI
+    Route::get('/profile', [ProfileController::class, 'edit']);
+    Route::patch('/profile', [ProfileController::class, 'update']);
+    Route::delete('/profile', [ProfileController::class, 'destroy']);
 });
 
 // 新規ユーザー登録API

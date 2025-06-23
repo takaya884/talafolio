@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Inertia\Inertia;
-use League\Uri\Exceptions\OffsetOutOfBounds;
 
 class NewsController extends Controller
 {
@@ -14,10 +12,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-
-            
         $apiKey = env('NEWS_API_KEY');
-        
+
         // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
             return response()->json([
@@ -25,11 +21,11 @@ class NewsController extends Controller
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
             ], 500);
         }
-        
+
         try {
             // 現在の日付から1週間前の日付を取得
             $fromDate = date('Y-m-d', strtotime('-7 days'));
-            
+
             // News APIからデータを取得（everythingエンドポイントを使用）
             $response = Http::get('https://newsapi.org/v2/everything', [
                 'q' => 'Japan OR 日本', // 日本関連のニュースを検索
@@ -42,6 +38,7 @@ class NewsController extends Controller
 
             // レスポンスをJSONとして解析
             $newsData = $response->json();
+
             // 記事データをJSONレスポンスとして返す
             return response()->json([
                 'articles' => $newsData['articles'] ?? [],
@@ -55,14 +52,14 @@ class NewsController extends Controller
             ], 500);
         }
     }
-    
+
     /**
      * カテゴリ別のニュースを表示
      */
     public function category($category)
     {
         $apiKey = env('NEWS_API_KEY');
-        
+
         // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
             return response()->json([
@@ -71,10 +68,10 @@ class NewsController extends Controller
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
             ], 500);
         }
-        
+
         // 有効なカテゴリのリスト
         $validCategories = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
-        
+
         // 無効なカテゴリの場合はエラーレスポンスを返す
         if (!in_array($category, $validCategories)) {
             return response()->json([
@@ -82,11 +79,11 @@ class NewsController extends Controller
                 'error' => '無効なカテゴリです。'
             ], 400);
         }
-        
+
         try {
             // 現在の日付から1週間前の日付を取得
             $fromDate = date('Y-m-d', strtotime('-7 days'));
-            
+
             // News APIからカテゴリ別のデータを取得
             $response = Http::get('https://newsapi.org/v2/everything', [
                 'q' => $category, // カテゴリをキーワードとして検索
@@ -96,10 +93,10 @@ class NewsController extends Controller
                 'apiKey' => $apiKey,
                 'pageSize' => 20,
             ]);
-            
+
             // レスポンスをJSONとして解析
             $newsData = $response->json();
-            
+
             // 記事データをJSONレスポンスとして返す
             return response()->json([
                 'articles' => $newsData['articles'] ?? [],
@@ -115,14 +112,14 @@ class NewsController extends Controller
             ], 500);
         }
     }
-    
+
     /**
      * キーワード検索
      */
     public function search(Request $request)
     {
         $keyword = $request->input('q');
-        
+
         // キーワードが空の場合はエラーレスポンスを返す
         if (empty($keyword)) {
             return response()->json([
@@ -130,9 +127,9 @@ class NewsController extends Controller
                 'error' => '検索キーワードを入力してください。'
             ], 400);
         }
-        
+
         $apiKey = env('NEWS_API_KEY');
-        
+
         // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
             return response()->json([
@@ -141,11 +138,11 @@ class NewsController extends Controller
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
             ], 500);
         }
-        
+
         try {
             // 現在の日付から1ヶ月前の日付を取得
             $fromDate = date('Y-m-d', strtotime('-1 month'));
-            
+
             // News APIからキーワード検索の結果を取得
             $response = Http::get('https://newsapi.org/v2/everything', [
                 'q' => $keyword,
@@ -155,10 +152,10 @@ class NewsController extends Controller
                 'apiKey' => $apiKey,
                 'pageSize' => 20,
             ]);
-            
+
             // レスポンスをJSONとして解析
             $newsData = $response->json();
-            
+
             // 記事データをJSONレスポンスとして返す
             return response()->json([
                 'articles' => $newsData['articles'] ?? [],
