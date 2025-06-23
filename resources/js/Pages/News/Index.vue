@@ -1,15 +1,22 @@
 <template>
-    <div>
+    <Head title="ニュース" />
+
+    <AuthenticatedLayout>
+        <template #header>
+            <div class="flex justify-between items-center">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    ニュース
+                </h2>
+                <div class="flex space-x-2">
+                    <Link :href="route('dashboard')" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        ダッシュボードに戻る
+                    </Link>
+                </div>
+            </div>
+        </template>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight pl-2">
-                        ニュース
-                    </h2>
-                    <button @click="goDashboard" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                        ダッシュボードに戻る
-                    </button>
-                </div>
                 <!-- 検索フォーム -->
                 <div class="mb-6">
                     <form @submit.prevent="searchNews" class="flex">
@@ -27,6 +34,7 @@
                         </button>
                     </form>
                 </div>
+
                 <!-- カテゴリナビゲーション -->
                 <div class="mb-6 flex flex-wrap gap-2">
                     <button 
@@ -43,15 +51,18 @@
                         {{ category.label }}
                     </button>
                 </div>
+
                 <!-- エラーメッセージ表示 -->
                 <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
                     <strong class="font-bold">エラー:</strong>
                     <span class="block sm:inline">{{ error }}</span>
                 </div>
+
                 <!-- ローディング表示 -->
                 <div v-if="loading" class="flex justify-center items-center py-12">
                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                 </div>
+
                 <!-- ニュース記事一覧 -->
                 <div v-else class="space-y-6">
                     <div v-if="articles.length > 0">
@@ -107,11 +118,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </AuthenticatedLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { Head, Link } from '@inertiajs/vue3';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
@@ -219,9 +232,7 @@ const goDashboard = () => {
     router.push('/dashboard');
 };
 
-onMounted(async () => {
-    // SanctumのCSRFクッキーを取得してからAPIリクエスト
-    await axios.get('/sanctum/csrf-cookie', { withCredentials: true });
+onMounted(() => {
     fetchNews();
 });
 </script> 

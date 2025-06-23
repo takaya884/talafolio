@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
+use League\Uri\Exceptions\OffsetOutOfBounds;
 
 class NewsController extends Controller
 {
@@ -12,14 +14,16 @@ class NewsController extends Controller
      */
     public function index()
     {
+
+            
         $apiKey = env('NEWS_API_KEY');
         
-        // APIキーが設定されていない場合はエラーメッセージを表示
+        // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
-            return view('news.index', [
+            return response()->json([
                 'articles' => [],
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
-            ]);
+            ], 500);
         }
         
         try {
@@ -38,18 +42,17 @@ class NewsController extends Controller
 
             // レスポンスをJSONとして解析
             $newsData = $response->json();
-            
-            // 記事データをビューに渡す
-            return view('news.index', [
+            // 記事データをJSONレスポンスとして返す
+            return response()->json([
                 'articles' => $newsData['articles'] ?? [],
                 'error' => null
             ]);
         } catch (\Exception $e) {
             // エラーが発生した場合
-            return view('news.index', [
+            return response()->json([
                 'articles' => [],
                 'error' => 'ニュースの取得に失敗しました: ' . $e->getMessage()
-            ]);
+            ], 500);
         }
     }
     
@@ -60,21 +63,24 @@ class NewsController extends Controller
     {
         $apiKey = env('NEWS_API_KEY');
         
-        // APIキーが設定されていない場合はエラーメッセージを表示
+        // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
-            return view('news.category', [
+            return response()->json([
                 'articles' => [],
                 'category' => $category,
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
-            ]);
+            ], 500);
         }
         
         // 有効なカテゴリのリスト
         $validCategories = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
         
-        // 無効なカテゴリの場合はリダイレクト
+        // 無効なカテゴリの場合はエラーレスポンスを返す
         if (!in_array($category, $validCategories)) {
-            return redirect()->route('news.index');
+            return response()->json([
+                'articles' => [],
+                'error' => '無効なカテゴリです。'
+            ], 400);
         }
         
         try {
@@ -94,19 +100,19 @@ class NewsController extends Controller
             // レスポンスをJSONとして解析
             $newsData = $response->json();
             
-            // 記事データをビューに渡す
-            return view('news.category', [
+            // 記事データをJSONレスポンスとして返す
+            return response()->json([
                 'articles' => $newsData['articles'] ?? [],
                 'category' => $category,
                 'error' => null
             ]);
         } catch (\Exception $e) {
             // エラーが発生した場合
-            return view('news.category', [
+            return response()->json([
                 'articles' => [],
                 'category' => $category,
                 'error' => 'ニュースの取得に失敗しました: ' . $e->getMessage()
-            ]);
+            ], 500);
         }
     }
     
@@ -117,20 +123,23 @@ class NewsController extends Controller
     {
         $keyword = $request->input('q');
         
-        // キーワードが空の場合はトップページにリダイレクト
+        // キーワードが空の場合はエラーレスポンスを返す
         if (empty($keyword)) {
-            return redirect()->route('news.index');
+            return response()->json([
+                'articles' => [],
+                'error' => '検索キーワードを入力してください。'
+            ], 400);
         }
         
         $apiKey = env('NEWS_API_KEY');
         
-        // APIキーが設定されていない場合はエラーメッセージを表示
+        // APIキーが設定されていない場合はエラーメッセージを返す
         if (!$apiKey) {
-            return view('news.search', [
+            return response()->json([
                 'articles' => [],
                 'keyword' => $keyword,
                 'error' => 'NEWS_API_KEYが設定されていません。.envファイルに追加してください。'
-            ]);
+            ], 500);
         }
         
         try {
@@ -150,19 +159,19 @@ class NewsController extends Controller
             // レスポンスをJSONとして解析
             $newsData = $response->json();
             
-            // 記事データをビューに渡す
-            return view('news.search', [
+            // 記事データをJSONレスポンスとして返す
+            return response()->json([
                 'articles' => $newsData['articles'] ?? [],
                 'keyword' => $keyword,
                 'error' => null
             ]);
         } catch (\Exception $e) {
             // エラーが発生した場合
-            return view('news.search', [
+            return response()->json([
                 'articles' => [],
                 'keyword' => $keyword,
-                'error' => 'ニュースの取得に失敗しました: ' . $e->getMessage()
-            ]);
+                'error' => 'ニュースの検索に失敗しました: ' . $e->getMessage()
+            ], 500);
         }
     }
 }
